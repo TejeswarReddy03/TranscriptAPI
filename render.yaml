@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: youtube-transcript-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    plan: free
+    autoDeploy: false
+    envVars:
+      - key: REQUEST_DELAY
+        value: "1.0"
+      - key: MAX_REQUESTS_PER_MINUTE
+        value: "30"
+      - key: FLASK_ENV
+        value: "production"
